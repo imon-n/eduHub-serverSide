@@ -22,14 +22,6 @@ StudyHub Server is a backend API for an online learning platform that connects s
 
 ---
 
-## 📁 Folder Structure
-
-```
-
-
-
-````
-
 ---
 
 ## 🛠️ Tech Stack
