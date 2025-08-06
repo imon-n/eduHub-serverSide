@@ -29,18 +29,7 @@ StudyHub Server is a backend API for an online learning platform that connects s
 
 ## 📁 Project Structure
 
-```
 
-studyhub-server/
-├── controllers/         # Business logic
-├── models/              # DB access logic
-├── routes/              # API route definitions
-├── middlewares/         # Custom auth & role check
-├── config/              # Firebase and MongoDB setup
-├── app.js               # App setup and middleware
-├── server.js            # Entry point
-├── .env                 # Environment variables
-└── package.json         # Dependencies and scripts
 
 ````
 
