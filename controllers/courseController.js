@@ -3,8 +3,10 @@ const {
   getAllCourses,
   getCourseById,
   updateCourse,
+  updateCourseFee,
   deleteCourse,
 } = require("../models/courseModel");
+
 
 // POST /api/courses
 const createCourseHandler = async (req, res) => {
@@ -57,10 +59,27 @@ const deleteCourseHandler = async (req, res) => {
   }
 };
 
+const updateCourseFeeHandler = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { registrationFee } = req.body;
+    if (!registrationFee) {
+      return res.status(400).send({ message: "Registration fee required" });
+    }
+    const result = await updateCourseFee(id, registrationFee);
+    res.send(result);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send({ message: "Failed to update fee" });
+  }
+};
+
+
 module.exports = {
   createCourseHandler,
   getAllCoursesHandler,
   getCourseByIdHandler,
   updateCourseHandler,
   deleteCourseHandler,
+  updateCourseFeeHandler
 };

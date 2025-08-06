@@ -31,10 +31,19 @@ const deleteCourse = async (id) => {
   return await collection().deleteOne({ _id: new ObjectId(id) });
 };
 
+
+const updateCourseFee = async (id, registrationFee) => {
+  return await collection().updateOne(
+    { _id: new ObjectId(id) },
+    { $set: { registrationFee: parseFloat(registrationFee) } }
+  );
+};
+
 module.exports = {
   createCourse,
   getAllCourses,
   getCourseById,
   updateCourse,
   deleteCourse,
+  updateCourseFee
 };
