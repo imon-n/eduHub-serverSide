@@ -26,16 +26,7 @@ StudyHub Server is a backend API for an online learning platform that connects s
 
 ```
 
-studyhub-server/
-├── controllers/
-├── models/
-├── routes/
-├── middlewares/
-├── config/
-├── app.js
-├── server.js
-├── .env
-└── package.json
+
 
 ````
 
@@ -197,5 +188,5 @@ Made with by [Nur Mohammad Imon](https://github.com/imon-n)
 
 ---
 
-I'm happy to help!
+
 ```
