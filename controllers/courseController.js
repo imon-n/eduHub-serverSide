@@ -5,6 +5,7 @@ const {
   updateCourse,
   updateCourseFee,
   deleteCourse,
+  updateCourseStatus,
 } = require("../models/courseModel");
 
 
@@ -21,12 +22,15 @@ const createCourseHandler = async (req, res) => {
 // GET /api/courses
 const getAllCoursesHandler = async (req, res) => {
   try {
-    const courses = await getAllCourses();
+    const { status } = req.query;
+    const courses = await getAllCourses(status);
     res.send(courses);
   } catch (err) {
+    console.error("Error fetching courses:", err);
     res.status(500).send({ message: "Failed to get courses" });
   }
 };
+
 
 // GET /api/courses/:id
 const getCourseByIdHandler = async (req, res) => {
@@ -38,6 +42,31 @@ const getCourseByIdHandler = async (req, res) => {
     res.status(500).send({ message: "Failed to get course" });
   }
 };
+
+
+const updateCourseStatusHandler = async (req, res) => {
+  const { id } = req.params;
+  const { status, registrationFee } = req.body; // ✅ Add this
+  
+  
+  try {
+    const updateFields = { status };
+    
+    // ✅ If registrationFee is sent and valid
+    if (registrationFee !== undefined) {
+      updateFields.registrationFee = parseFloat(registrationFee);
+    }
+    console.log(updateFields);
+
+    const result = await updateCourse(req.params.id, updateFields);
+    res.send(result);
+  } catch (err) {
+    console.error("Update failed:", err);
+    res.status(500).send({ message: "Failed to update course status" });
+  }
+};
+
+
 
 // PATCH /api/courses/:id
 const updateCourseHandler = async (req, res) => {
@@ -81,5 +110,6 @@ module.exports = {
   getCourseByIdHandler,
   updateCourseHandler,
   deleteCourseHandler,
-  updateCourseFeeHandler
+  updateCourseFeeHandler,
+  updateCourseStatusHandler
 };

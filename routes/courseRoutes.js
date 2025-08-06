@@ -7,6 +7,7 @@ const {
   getCourseByIdHandler,
   updateCourseHandler,
   deleteCourseHandler,
+  updateCourseStatusHandler,
   updateCourseFeeHandler
 } = require("../controllers/courseController");
 
@@ -16,7 +17,8 @@ router.post("/", verifyFBToken, createCourseHandler);
 router.get("/", getAllCoursesHandler);
 router.get("/:id", getCourseByIdHandler);
 router.patch("/:id", verifyFBToken, updateCourseHandler);
-router.patch("/course/:id/fee", updateCourseFeeHandler);
+router.patch("/:id/fee", updateCourseFeeHandler);
+router.patch("/:id/status", updateCourseStatusHandler);
 router.delete("/:id", verifyFBToken, deleteCourseHandler);
 
 module.exports = router;

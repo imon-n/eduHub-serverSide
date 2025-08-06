@@ -9,9 +9,11 @@ const createCourse = async (course) => {
 };
 
 // Get all courses
-const getAllCourses = async () => {
-  return await collection().find({}).toArray();
+const getAllCourses = async (status) => {
+  const filter = status ? { status } : {};
+  return await collection().find(filter).toArray();
 };
+
 
 // Get course by ID
 const getCourseById = async (id) => {
@@ -39,11 +41,18 @@ const updateCourseFee = async (id, registrationFee) => {
   );
 };
 
+const updateCourseStatus = async (id, status) => {
+  const query = { _id: new ObjectId(id) };
+  const updateDoc = { $set: { status } };
+  return await getDB().collection("courses").updateOne(query, updateDoc);
+};
+
 module.exports = {
   createCourse,
   getAllCourses,
   getCourseById,
   updateCourse,
   deleteCourse,
-  updateCourseFee
+  updateCourseStatus,
+  updateCourseFee,
 };
