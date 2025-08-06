@@ -14,14 +14,13 @@ app.use(express.json());
 // Connect MongoDB
 connectDB();
 
-// // Routes
+// Routes
 app.use("/users", require("./routes/userRoutes"));
-// app.use("/api/courses", require("./routes/courseRoutes"));
-// app.use("/api/notes", require("./routes/noteRoutes"));
-// app.use("/api/rejected", require("./routes/rejectedRoutes"));
-// app.use("/api/materials", require("./routes/materialRoutes"));
-// app.use("/api/payments", require("./routes/paymentRoutes"));
-// app.use("/api/auth", require("./routes/authRoutes"));
+app.use("/courses", require("./routes/courseRoutes"));
+app.use("/notes", require("./routes/noteRoutes"));
+app.use("/rejected", require("./routes/rejectedRoutes"));
+app.use("/materials", require("./routes/materialRoutes"));
+app.use("/payments", require("./routes/paymentRoutes"));
 
 app.get("/", (req, res) => {
   res.send("Study Server is running");
