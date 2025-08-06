@@ -1,9 +1,7 @@
 require("dotenv").config();
-
 const express = require("express");
 const cors = require("cors");
 const app = express();
-
 const { connectDB } = require("./config/db");
 require("./config/firebase"); // Firebase init
 
