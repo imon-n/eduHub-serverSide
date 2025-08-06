@@ -1,12 +1,8 @@
 
----
-
-### ✅ `README.md`
-
 ```markdown
 # 📚 StudyHub Server
 
-StudyHub Server is a backend API for an online learning platform that connects students, tutors, and admins. Built with Node.js, Express, MongoDB, and Firebase for authentication, it supports role-based access, course management, payments, notes, materials, and more.
+StudyHub Server is a backend API for an online learning platform that connects students, tutors, and admins. Built with Node.js, Express, MongoDB, and Firebase, it handles everything from user roles to payments and materials.
 
 ---
 
@@ -14,7 +10,7 @@ StudyHub Server is a backend API for an online learning platform that connects s
 
 - ✅ Firebase Authentication (JWT)
 - ✅ Role-Based Access Control (`admin`, `tutor`, `user`)
-- ✅ CRUD for:
+- ✅ Full CRUD Support:
   - Users
   - Courses
   - Notes
@@ -22,14 +18,24 @@ StudyHub Server is a backend API for an online learning platform that connects s
   - Materials
   - Payments
 - ✅ Stripe Payment Integration
-- ✅ RESTful API structure with MVC pattern
-- ✅ Modular and scalable folder structure
+- ✅ Organized MVC Architecture
 
 ---
 
-## 📁 Project Structure
+## 📁 Folder Structure
 
+```
 
+studyhub-server/
+├── controllers/
+├── models/
+├── routes/
+├── middlewares/
+├── config/
+├── app.js
+├── server.js
+├── .env
+└── package.json
 
 ````
 
@@ -38,16 +44,16 @@ StudyHub Server is a backend API for an online learning platform that connects s
 ## 🛠️ Tech Stack
 
 - **Backend:** Node.js, Express.js
-- **Database:** MongoDB Atlas
-- **Auth:** Firebase Admin SDK
-- **Payment:** Stripe
-- **Deployment Ready:** Yes (Render, Vercel backend, or any VPS)
+- **Database:** MongoDB (Atlas)
+- **Authentication:** Firebase Admin SDK
+- **Payments:** Stripe
 
 ---
 
-## ⚙️ Installation
+## ⚙️ Setup Instructions
 
 1. **Clone the repository:**
+
    ```bash
    git clone https://github.com/yourusername/studyhub-server.git
    cd studyhub-server
@@ -59,7 +65,7 @@ StudyHub Server is a backend API for an online learning platform that connects s
    npm install
    ```
 
-3. **Create a `.env` file in the root directory:**
+3. **Create `.env` file:**
 
    ```env
    PORT=5000
@@ -68,55 +74,128 @@ StudyHub Server is a backend API for an online learning platform that connects s
    PAYMENT_GATEWAY_KEY=your_stripe_secret_key
    ```
 
-4. **Place your Firebase Admin SDK file:**
+4. **Add Firebase Admin SDK:**
 
-   * Name it `firebase-admin-key.json` and place it in the root folder.
+   Place `firebase-admin-key.json` in the project root.
 
-5. **Start the development server:**
-
-   ```bash
-   npm run dev
-   ```
-
-   Or for production:
+5. **Run the server:**
 
    ```bash
-   npm start
+   npm run dev  # for development
+   npm start    # for production
    ```
 
 ---
 
-## 🔐 Environment Variables
+## 🔗 API Endpoints (No `/api` prefix)
 
-| Key                   | Description                |
-| --------------------- | -------------------------- |
-| `PORT`                | Port number for the server |
-| `DB_USER`             | MongoDB username           |
-| `DB_PASS`             | MongoDB password           |
-| `PAYMENT_GATEWAY_KEY` | Stripe secret key          |
+> All protected routes require `Authorization: Bearer <Firebase ID Token>`
 
 ---
 
-➡️ *And many more.*
+### 🔐 Auth
 
-
-## 🙌 Acknowledgements
-
-* [Firebase Admin SDK](https://firebase.google.com/docs/admin/setup)
-* [MongoDB Atlas](https://www.mongodb.com/cloud/atlas)
-* [Stripe Docs](https://stripe.com/docs)
-* [Express.js](https://expressjs.com)
+| Method | Endpoint   | Description             |
+| ------ | ---------- | ----------------------- |
+| GET    | `/auth/me` | Get logged-in user info |
 
 ---
 
-## 💡 Author
+### 👤 Users
 
-Developed by [Nur Mohammad Imon](https://github.com/imon-n)
+| Method | Endpoint             | Description            |
+| ------ | -------------------- | ---------------------- |
+| POST   | `/users`             | Create/register user   |
+| GET    | `/users`             | Get all tutors         |
+| GET    | `/users/search`      | Search users by email  |
+| GET    | `/users/:email/role` | Get user role by email |
+| PATCH  | `/users/:id/role`    | Update user role       |
+
+---
+
+### 📚 Courses
+
+| Method | Endpoint       | Description         |
+| ------ | -------------- | ------------------- |
+| POST   | `/courses`     | Create a new course |
+| GET    | `/courses`     | Get all courses     |
+| GET    | `/courses/:id` | Get course by ID    |
+| PATCH  | `/courses/:id` | Update course       |
+| DELETE | `/courses/:id` | Delete course by ID |
+
+---
+
+### 🗒️ Notes
+
+| Method | Endpoint     | Description       |
+| ------ | ------------ | ----------------- |
+| POST   | `/notes`     | Create a new note |
+| GET    | `/notes`     | Get all notes     |
+| GET    | `/notes/:id` | Get note by ID    |
+| PATCH  | `/notes/:id` | Update note by ID |
+| DELETE | `/notes/:id` | Delete note by ID |
+
+---
+
+### 🚫 Rejected Courses
+
+| Method | Endpoint        | Description               |
+| ------ | --------------- | ------------------------- |
+| POST   | `/rejected`     | Add rejected course       |
+| GET    | `/rejected`     | Get all rejected courses  |
+| GET    | `/rejected/:id` | Get rejected course by ID |
+| PATCH  | `/rejected/:id` | Update rejected course    |
+| DELETE | `/rejected/:id` | Delete rejected course    |
+
+---
+
+### 📦 Materials
+
+| Method | Endpoint         | Description           |
+| ------ | ---------------- | --------------------- |
+| POST   | `/materials`     | Upload material       |
+| GET    | `/materials`     | Get all materials     |
+| GET    | `/materials/:id` | Get material by ID    |
+| PATCH  | `/materials/:id` | Update material by ID |
+| DELETE | `/materials/:id` | Delete material by ID |
+
+---
+
+### 💳 Payments
+
+| Method | Endpoint                 | Description                  |
+| ------ | ------------------------ | ---------------------------- |
+| POST   | `/payments`              | Record a new payment         |
+| GET    | `/payments`              | Get all payments             |
+| GET    | `/payments/:id`          | Get payment by ID            |
+| PATCH  | `/payments/:id`          | Update payment info          |
+| DELETE | `/payments/:id`          | Delete a payment record      |
+| POST   | `/create-payment-intent` | Create Stripe payment intent |
+
+---
+
+## 🔐 Auth Middleware
+
+All protected endpoints require Firebase token in headers:
+
+```
+Authorization: Bearer <Firebase_ID_Token>
+```
+
+---
+
+
+---
+
+## 👨‍💻 Author
+
+Made with by [Nur Mohammad Imon](https://github.com/imon-n)
 
 ---
 
 ```
 
+---
 
-Want a version of the README that includes **frontend usage**, **Postman API documentation**, or **deployment guide**? Just let me know!
+I'm happy to help!
 ```
