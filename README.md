@@ -165,18 +165,7 @@ Authorization: Bearer <Firebase_ID_Token>
 
 ---
 
-
----
-
 ## 👨‍💻 Author
 
 Made with by [Nur Mohammad Imon](https://github.com/imon-n)
 
----
-
-```
-
----
-
-
-```
