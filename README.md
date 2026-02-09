@@ -1,5 +1,4 @@
-
-```markdown
+---
 #StudyHub Server
 
 StudyHub Server is a backend API for an online learning platform that connects students, tutors, and admins. Built with Node.js, Express, MongoDB, and Firebase, it handles everything from user roles to payments and materials.
